@@ -1,10 +1,12 @@
-((window, document) ->
+((window) ->
     document = window.document
 
-    class Taz
-        constructor: (@classId = 'taz')->
-        test: -> alert "test"
+    window.taz = taz = (classId = 'taz') ->
+        diff = getDiff()
+        el = document.getElementsByClassName classId
 
-    window.taz = new Taz()
+    getDiff = ->
+        [n, utc] = [new Date, new Date]
+        return {hours: n.getHours() - utc.getUTCHours(), minutes: n.getMinutes() - utc.getUTCMinutes()}
       
-) window, document;
+) window;
