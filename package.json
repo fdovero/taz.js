@@ -1,0 +1,13 @@
+{
+  "name": "taz.js",
+  "description": "Simple timezones for masses",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "taz.js"
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-coffeelint": "~0.0.7",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}
