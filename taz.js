@@ -1,21 +1,24 @@
 (function() {
   (function(window) {
-    var document, getDiff, taz, tazIt;
+    var document, taz;
     document = window.document;
-    window.taz = taz = function(classId) {
+    window.taz = taz = function(params) {
       var el, _i, _len, _ref, _results;
-      if (classId == null) {
-        classId = 'taz';
+      if (params.classId == null) {
+        params.classId = "taz";
       }
-      _ref = document.getElementsByClassName(classId);
+      if (params.offset == null) {
+        params.offset = 0;
+      }
+      _ref = document.querySelectorAll(params.classId);
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         el = _ref[_i];
-        _results.push(tazIt(el));
+        _results.push(tazIt(el, params.offset));
       }
       return _results;
     };
-    getDiff = function() {
+    this.getDiff = function() {
       var hours, minutes, n, utc, _ref;
       _ref = [new Date, new Date], n = _ref[0], utc = _ref[1];
       hours = n.getHours() - utc.getUTCHours();
@@ -25,12 +28,15 @@
         minutes: minutes
       };
     };
-    return tazIt = function(el) {
-      var d, diff;
+    return this.tazIt = function(el) {
+      var d, diff, h, m;
       d = new Date;
       diff = getDiff();
       d.parse(el.innerHTML);
-      return el.innerHTML = d.getHours() + diff.hours + ':' + d.getMinutes() + diff.minutes;
+      h = d.getHours() + diff.hours + params.offset;
+      m = d.getMinutes() + diff.minutes;
+      console.log(h + ':' + m);
+      return el.innerHTML = h + ':' + m;
     };
   })(window);
 
